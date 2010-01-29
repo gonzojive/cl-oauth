@@ -87,7 +87,7 @@ Returns the authorized token or NIL if the token couldn't be found."
          (user-parameters (remove-oauth-parameters parameters)))
     (cond
       (token
-       (authorize-request-token* token)
+       (authorize-request-token token)
        (setf (token-user-data token) user-parameters)
        token)
       (t
