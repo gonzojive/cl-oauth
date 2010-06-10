@@ -46,10 +46,15 @@
 
       #:access-token
       #:make-access-token
+      #:access-token-session-handle
+      #:access-token-expires
+      #:access-token-authorization-expires
+      #:access-token-expired-p
 
       ;;; consumer functions
       #:obtain-access-token
       #:authorize-request-token
+      #:authorize-request-token-from-request
       #:make-authorization-uri
       #:obtain-request-token
       #:access-protected-resource

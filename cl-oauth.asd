@@ -12,7 +12,7 @@
 (defsystem :cl-oauth
   :name "CL-OAuth"
   :description "Common Lisp OAuth implementation"
-  :version "2"
+  :version "3"
   :maintainer "Leslie P. Polzer <polzer@gnu.org>"
   :licence "LLGPL"
   :components ((:static-file "cl-oauth.asd")
@@ -20,9 +20,10 @@
                         :components ((:file "package")
                                      (:module "util"
                                               :components ((:file "misc")
-                                                           (:file "uri")
                                                            (:file "query-string"
-                                                                  :depends-on ("misc")))
+                                                                  :depends-on ("misc"))
+                                                           (:file "uri"
+                                                                  :depends-on ("query-string")))
                                               :depends-on ("package"))
                                      (:module "core"
                                               :components ((:file "crypto")
@@ -62,8 +63,4 @@
                :drakma
                :puri :hunchentoot)
   :in-order-to ((asdf:test-op (load-op "cl-oauth"))))
-
-(defmethod perform ((o asdf:test-op) (c (eql (find-system :cl-oauth))))
-  (funcall (intern "RUN!" :5am)
-           (intern "OAUTH" :oauth-test)))
 

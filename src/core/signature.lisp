@@ -6,16 +6,16 @@
                                    (parameters (normalized-parameters)))
   (concatenate 'string (string-upcase (princ-to-string request-method))
                        "&" (url-encode
-                             (normalize-request-uri uri))
+                             (normalize-uri uri))
                        "&" (url-encode
                              (alist->query-string parameters
 						  :url-encode t
                                                   :include-leading-ampersand nil))))
 
 (declaim (notinline hmac-key)) ; we want to trace this when debugging. 
-(defun hmac-key (consumer-secret &optional (token-secret ""))
+(defun hmac-key (consumer-secret &optional token-secret)
   "9.2"
-  (concatenate 'string consumer-secret "&" token-secret))
+  (concatenate 'string (url-encode consumer-secret) "&" (url-encode (or token-secret ""))))
 
 (defun encode-signature (octets url-encode-p)
   "9.2.1"
